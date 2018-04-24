@@ -1,7 +1,4 @@
 defmodule Clandestine do
-  @secret System.get_env("RPC_TOKEN") |> to_charlist
-  @secret_length System.get_env("RPC_TOKEN") |> to_charlist |> length
-
   def encrypt(term) do
     term
     |> :erlang.term_to_binary()
@@ -19,6 +16,13 @@ defmodule Clandestine do
   end
 
   defp secret_char(i) do
-    Enum.at(@secret, rem(i, @secret_length))
+    secret = System.get_env("RPC_TOKEN") |> to_charlist
+
+    secret_length =
+      System.get_env("RPC_TOKEN")
+      |> to_charlist
+      |> length
+
+    Enum.at(secret, rem(i, secret_length))
   end
 end

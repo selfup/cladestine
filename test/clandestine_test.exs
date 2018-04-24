@@ -29,4 +29,14 @@ defmodule ClandestineTest do
 
     assert Clandestine.decrypt(secret_list) == term
   end
+
+  test "it's not slow" do
+    prev = System.monotonic_time(:milliseconds)
+
+    0..50_000 |> Enum.each(&Clandestine.encrypt(&1))
+
+    time_spent = System.monotonic_time(:milliseconds) - prev
+
+    assert time_spent < 1_000
+  end
 end
