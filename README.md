@@ -62,9 +62,9 @@ secret = Clandestine.encrypt("hello")
 
 Assuming both nodes share the same ENV variable (RPC_TOKEN), the argument will be encrypted prior to being sent and then decrypted in the response.
 
-What you really want to do is encrypted on its way back to ensure safe travel, and then decrypt it back on your end.
+### Two way encryption
 
-***
+What you really want to do, is encrypt it on its way back to ensure safe travel, and then decrypt it back on your end.
 
 Say you need the other node to do some work with your payload:
 
@@ -92,7 +92,13 @@ IO.inspect Clandestine.decrypt(secret)
 # => 9042
 ```
 
-Your payloads have been kept secret the whole time. Both times over the wire :pray:
+Your payloads have been kept secret the whole time :pray:
+
+```
+A -> B
+
+B -> A
+```
 
 ### Disclaimer
 
